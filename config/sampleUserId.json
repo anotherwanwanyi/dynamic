@@ -1,18 +1,10 @@
 [
     {
         "platform": "bilibili",
-        "input_list": [
-            {
-                "userID": "sample"
-            }
-        ]
+        "input_list": []
     },
     {
         "platform": "zhihu",
-        "input_list": [
-            {
-                "userID": "sample"
-            }
-        ]
+        "input_list": []
     }
 ]

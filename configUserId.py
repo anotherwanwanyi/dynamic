@@ -1,5 +1,6 @@
 import json
 
+# 注意将config文件夹中的sample重命名为userId.json
 file_path = "./config/userId.json"
 
 with open(file_path, "r") as file:
