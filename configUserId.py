@@ -11,7 +11,7 @@ data = json.loads(json_data)
 for platform in data:
     print("当前平台：" + platform["platform"])
 
-    input_list = platform["input_list"]
+    id_list = platform["id_list"]
 
     while True:
         user_input = input("请输入用户ID（输入'q'退出）: ")
@@ -21,9 +21,9 @@ for platform in data:
 
         input_data = {"userID": user_input}
 
-        input_list.append(input_data)
+        id_list.append(input_data)
 
-    platform["input_list"] = input_list
+    platform["id_list"] = id_list
 
 json_data = json.dumps(data, indent=4, ensure_ascii=False)
 
