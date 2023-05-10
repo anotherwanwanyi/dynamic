@@ -1,3 +1,9 @@
 # config
 
 /config/userId.json
+
+# cache
+
+/request/__pycache__
+/cache/bilibili/
+
