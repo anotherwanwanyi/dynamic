@@ -1,9 +1,9 @@
 - platform_name: bilibili
   cookie: sample
-  uid: sample
+  uid: 'sample'
   users:
-    - user_id: sample
+    - user_id: 'sample'
 - platform_name: zhihu
   cookie: 
   users:
-    - user_id: sample
+    - user_id: 'sample'
