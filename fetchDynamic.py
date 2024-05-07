@@ -1,32 +1,22 @@
-import json
-import request.bilibili as bilibili
+import yaml
+import lib.fetcher.bilibili as bilibili
 
-file_path = "./config/userId.json"
+file_path = "./config/userId.yaml"
 
 with open(file_path, "r") as file:
-    json_data = file.read()
+    yaml_content = file.read()
 
-data = json.loads(json_data)
+yaml_data = yaml.safe_load(yaml_content)
 
-for platform in data:
-    platformName = platform["platform"]
-    data_list = platform["id_list"]
-    for row in data_list:
-        userID = row["userID"]
-        match platformName:
-            case "bilibili":
-                output_data = bilibili.getBilibiliDynamic(userID)
-            case "zhihu":
-                output_data = None
-                print("WIP")
-            case _:
-                output_data = None
-                print("WIP")
+for platform in yaml_data:
+    platformName = platform["platform_name"]
+    cookie = platform["cookie"]
+    data_list = platform["users"]
+    match platformName:
+        case "bilibili":
+            bilibili.process(platform["uid"], cookie, data_list)
+        # case "zhihu":
+        #     print("WIP")
+        case _:
+            print(f"{platformName}: WIP")
 
-        if output_data is None:
-            print(f"{platformName}的用户{userID}信息获取失败")
-            continue
-
-        # 请先创建对应文件夹，如 cache/bilibili
-        with open(f"./cache/{platformName}/{userID}.json", "w") as file:
-            file.write(output_data)

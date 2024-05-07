@@ -1,14 +1,21 @@
-import json
+import os
+import yaml
 
-# 注意将config文件夹中的sample重命名为userId.json
-file_path = "./config/userId.json"
+filePath = "./config/userId.yaml"
+sampleFilePath = "./config/userId.yaml"
 
-with open(file_path, "r") as file:
-    json_data = file.read()
+if os.path.exists(filePath):
+    with open(filePath, "r") as file:
+        yaml_content = file.read()
+else:
+    with open(sampleFilePath, "r") as file:
+        yaml_content = file.read()
 
-data = json.loads(json_data)
+yaml_data = yaml.safe_load(yaml_content)
 
-for platform in data:
+# TODO
+
+for platform in yaml_data:
     print("当前平台：" + platform["platform"])
 
     id_list = platform["id_list"]
@@ -25,7 +32,7 @@ for platform in data:
 
     platform["id_list"] = id_list
 
-json_data = json.dumps(data, indent=4, ensure_ascii=False)
+yaml_content = yaml.dump(yaml_data)
 
-with open(file_path, "w") as file:
-    file.write(json_data)
+with open(filePath, "w") as file:
+    file.write(yaml_content)

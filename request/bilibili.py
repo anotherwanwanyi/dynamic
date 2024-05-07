@@ -1,21 +1,37 @@
-import requests
-import json
+from request.basic import basicRequest
+from request.utils import getBiliJsonContent
+
+def returnContent(url, payload, headers):
+    content = basicRequest(url, payload, headers)
+    return getBiliJsonContent(content)
 
 
-def getBilibiliDynamic(upID):
+def getBilibiliUpDynamic(upID, cookie):
     """
-    input: upID
+    input: upID cookie
     output: JSON Item or None
     """
     url = "https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/space"
-    payload = {"host_mid": upID}
+    payload = { "host_mid": upID,
+                "platform": "web",
+                "features": "itemOpusStyle,listOnlyfans,opusBigCover,onlyfansVote" }
+    headers = { "User-Agent": "",
+                "Cookie": cookie }
 
-    response = requests.get(url, params=payload)
+    return returnContent(url, payload, headers)
 
-    if response.status_code == 200:
-        data = json.loads(response.content)
-        data = json.dumps(data, indent=4, ensure_ascii=False)
-        return data
 
-    else:
-        return
+def getBilibiliUserDynamic(uid, cookie=None):
+    """
+    input: uid cookie(Optional)
+    output: JSON Item or None
+    """
+    url = "https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new"
+    payload = { "uid": uid,
+                "type_list": 268435455 }
+    headers = { "User-Agent": "" }
+
+    if cookie is not None:
+        headers["Cookie"] = cookie
+
+    return returnContent(url, payload, headers)
