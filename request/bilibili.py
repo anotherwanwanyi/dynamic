@@ -1,8 +1,8 @@
 from request.basic import basicRequest
 from request.utils import getBiliJsonContent
 
-def returnContent(url, payload, headers):
-    content = basicRequest(url, payload, headers)
+def returnBilibiliContent(url, payload, headers):
+    content = basicRequest('get', url, payload, headers)
     return getBiliJsonContent(content)
 
 
@@ -18,7 +18,7 @@ def getBilibiliUpDynamic(upID, cookie):
     headers = { "User-Agent": "",
                 "Cookie": cookie }
 
-    return returnContent(url, payload, headers)
+    return returnBilibiliContent(url, payload, headers)
 
 
 def getBilibiliUserDynamic(uid, cookie=None):
@@ -34,4 +34,4 @@ def getBilibiliUserDynamic(uid, cookie=None):
     if cookie is not None:
         headers["Cookie"] = cookie
 
-    return returnContent(url, payload, headers)
+    return returnBilibiliContent(url, payload, headers)
