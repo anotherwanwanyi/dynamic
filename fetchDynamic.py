@@ -1,5 +1,6 @@
 import yaml
 import lib.fetcher.bilibili as bilibili
+import lib.fetcher.zhihu as zhihu
 
 file_path = "./config/userId.yaml"
 
@@ -15,8 +16,8 @@ for platform in yaml_data:
     match platformName:
         case "bilibili":
             bilibili.process(platform["uid"], cookie, data_list)
-        # case "zhihu":
-        #     print("WIP")
+        case "zhihu":
+            zhihu.process(data_list)
         case _:
             print(f"{platformName}: WIP")
 
