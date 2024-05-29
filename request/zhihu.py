@@ -1,5 +1,5 @@
 from request.basic import tryRequest
-from request.utils import callback, dumpJson, getSignedHeader
+from request.utils import excepitonPrint, dumpJson, getSignedHeader
 
 def getZhihuPeopleActivities(id):
     """
@@ -11,7 +11,7 @@ def getZhihuPeopleActivities(id):
 
     url = f"https://www.zhihu.com{apiPath}"
 
-    response = tryRequest(callback=callback(f"zhihu people {id}"), method='get', url=url, headers=signedHeaders)
+    response = tryRequest(func=excepitonPrint(f"zhihu people {id}"), method='get', url=url, headers=signedHeaders)
 
     if response is None:
         return

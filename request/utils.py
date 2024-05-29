@@ -7,7 +7,7 @@ from request.lib.g_encrypt import encrypt
 def dumpJson(data):
     return json.dumps(data, indent=4, ensure_ascii=False)
 
-def callback(route: str):
+def excepitonPrint(route: str):
     def exception(e: Exception):
         print(f"Error when fetching {route}: ", e)
     return exception

@@ -1,5 +1,5 @@
 from request.basic import tryRequest
-from request.utils import callback, dumpJson
+from request.utils import excepitonPrint, dumpJson
 
 def getBiliJsonContent(response):
     """
@@ -15,8 +15,8 @@ def getBiliJsonContent(response):
     return dumpJson(data)
 
 
-def getBiliContent(callbackstr, url, payload, headers):
-    response = tryRequest(callback=callback(callbackstr), method='get', url=url, payload=payload, headers=headers)
+def getBiliContent(excepitonStr, url, payload, headers):
+    response = tryRequest(func=excepitonPrint(excepitonStr), method='get', url=url, payload=payload, headers=headers)
 
     if response is None:
         return

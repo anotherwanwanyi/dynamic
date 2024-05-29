@@ -27,14 +27,14 @@ def basicRequest(method, url, payload={}, headers={}):
 
     return response
 
-def tryRequest(callback, method, url, payload={}, headers={}):
+def tryRequest(func, method, url, payload={}, headers={}):
     """
-    input: callback method url payload headers
+    input: func method url payload headers
     output: Response | None
     """
     try:
         response = basicRequest(method, url, payload, headers)
         return response
     except Exception as e:
-        callback(e)
+        func(e)
         return
